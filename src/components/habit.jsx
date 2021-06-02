@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 class Habit extends Component {
-    state = {
-        count: 0,
-    };
     handleIncrement = () => {
-        this.setState({count: this.state.count + 1});
+        this.props.onIncrement(this.props.habit);
     };
     handleDecrement = () => {
-        if(this.state.count > 0) this.setState({count: this.state.count - 1});
+        this.props.onDecrement(this.props.habit);
+    };
+    handleDelete = () => {
+        this.props.onDelete(this.props.habit);
     };
     render() {
-        // console.log(this.props.habit);
+        // console.log(this.props);
         const { name, count } = this.props.habit; // 같은 변수 이름끼리 매칭됨.
         return (
             <li className="habit">
@@ -23,7 +23,7 @@ class Habit extends Component {
                 <button className="habit-button habit-decrease" onClick={this.handleDecrement}>
                     <i className="fas fa-minus-square"></i>
                 </button>
-                <button className="habit-button habit-delete">
+                <button className="habit-button habit-delete" onClick={this.handleDelete}>
                     <i className="fas fa-trash"></i>
                 </button>
             </li>
